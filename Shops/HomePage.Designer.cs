@@ -434,6 +434,7 @@
             Name = "HomePage";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "HomePage";
+            WindowState = FormWindowState.Maximized;
             Load += HomePage_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

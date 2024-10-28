@@ -66,8 +66,12 @@ namespace Shops
                     if (role == "Admin" || role == "User" || role == "Petugas")
                     {
                         // Kirim role, idUser, dan namaUser ke HomePage
-                        HomePage homePage = new HomePage(role, idUser, namaUser);
-                        homePage.Show();
+                        //HomePage homePage = new HomePage(role, idUser, namaUser);
+                        //homePage.Show();
+                        //this.Hide();
+
+                        LoadingScreen loadingScreen = new LoadingScreen(role, idUser, namaUser);
+                        loadingScreen.Show();
                         this.Hide();
                     }
 

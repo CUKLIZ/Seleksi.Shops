@@ -117,27 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="pictureBox3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAASVJREFUSEvt
-        lq1uAkEUhVcgK5EIRB+jAoFE8ACICiQPUImorKjD4nkIDJIEgahEIhAIREUFPd9kJ0HM/jBzISHsSb5k
-        fu49k9m52ZnsEdXOuYtexUwcxDmHNmPM3URDcRIs9ivWObQZY44YU72Jv5ypeBFetD+FnyfWRC2xFezq
-        nYECMUcMseQkix1guHK9chFDrMmuPwRmE9crFzHEkpMszg+zkeuVi+Ii9tv1EkUxYVZ2vl49Qezc9RL1
-        PAtTmQuxE5j9iGUFG0HsXpB7dXWPBQYW4FVL/ImOImQSA16Xf7pC9UXIIAXOvlK+QCypU5jNwiY0CwfV
-        LGzBQFSqK0LJKXRELXGthQxiuOqK5JX4Jfw7OgZy8Yh6cZLEp4/B5IlrrCz7BxKYaVwugwLGAAAAAElF
-        TkSuQmCC
-</value>
-  </data>
-  <data name="pictureBox2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAATpJREFUSEvF
-        lT1OAzEQhbfgAByBggOk4BgpUnAEjkCRkpIiUtKFO3AQ6KGDnoKSgjJ5XxRHG3gYr+11nvRJK9vzRv7Z
-        mW6gLsW9eBFfe/hm7EKMorn4Fps/YO5WVNVCuGQOdl9FM+ESxJiKYr0JZx6DmCJdCWecwkRk60Y40xSI
-        zdadcKYpEJutk+2Ye3KmKRTdMXoXzjgGMcU62X+MqEYugaNa5QqiDjev1UF0IHb0KkJ34nu07nQmuLel
-        eBIfIuyUb8aYYw1ri3UuKASfon+sMVhLDLFZuhZDEv6EWDySxVGthTPLAa9/j58Fj8IZlIBnNPmDcIE1
-        wNuK+3ABNfl157zAkoeUCr/e0Wsv6btDOfRpLr3FbgPk2j00qo1bMCa77rXqDbSCnN1zb6AV5Dwq+K0g
-        p50YmW6zBa/mDq0cLFCgAAAAAElFTkSuQmCC
-</value>
-  </data>
+  <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>

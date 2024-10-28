@@ -117,6 +117,7 @@
             label11.Size = new Size(18, 19);
             label11.TabIndex = 4;
             label11.Text = "0";
+            label11.Click += label11_Click;
             // 
             // label12
             // 
@@ -181,6 +182,7 @@
             label7.Size = new Size(18, 19);
             label7.TabIndex = 4;
             label7.Text = "0";
+            label7.Click += label7_Click;
             // 
             // label8
             // 
@@ -243,6 +245,7 @@
             label4.Size = new Size(18, 19);
             label4.TabIndex = 4;
             label4.Text = "0";
+            label4.Click += label4_Click;
             // 
             // label5
             // 
@@ -305,6 +308,7 @@
             label3.Size = new Size(18, 19);
             label3.TabIndex = 4;
             label3.Text = "0";
+            label3.Click += label3_Click;
             // 
             // label1
             // 
