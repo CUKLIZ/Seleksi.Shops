@@ -28,7 +28,7 @@ namespace Shops
 
             label3.Text = $"Welcome, {namaUser}";            
 
-            label5.Text = "Home";
+            label5.Text = "Home Page";
 
             this.role = userRole;
             this.userId = userId;
@@ -73,7 +73,7 @@ namespace Shops
             {
                 string nama = userName;
 
-                label3.Text = $"Welcome {userName}";
+                label3.Text = $"Welcome {userName}";              
                 Pesan.Hide();
             }
             else if (role == "User")
@@ -101,6 +101,7 @@ namespace Shops
                 Petugas.Hide();
 
             }
+
             //Home.Visible = true;
             ShowHomeControl();
 
@@ -109,7 +110,7 @@ namespace Shops
 
         private void ShowHomeControl()
         {
-            label5.Text = "Home"; 
+            label5.Text = "Home Page"; 
             Home homeControl = new Home();
             panel3.Controls.Clear();
             homeControl.Dock = DockStyle.Fill;
@@ -128,6 +129,7 @@ namespace Shops
 
         private void button1_Click(object sender, EventArgs e)
         {
+            label5.Text = "Home Page";
             Home homeControl = new Home();
             panel3.Controls.Clear();
             panel3.Controls.Add(homeControl);
@@ -164,13 +166,13 @@ namespace Shops
 
         private void TerimaPesanan_Click(object sender, EventArgs e)
         {
-            label5.Text = "Terima Pesanan";
+            label5.Text = "Terima Pesanan Page";
             loadForm(new TerimaPesan());
         }
 
         private void Pesan_Click(object sender, EventArgs e)
         {   
-            label5.Text = "Pesan";
+            label5.Text = "Pesan Pagw";
             PelanganPesan pelanganPesanControl = new PelanganPesan(userId, userName);
             panel3.Controls.Clear();
             panel3.Controls.Add(pelanganPesanControl);
@@ -178,7 +180,7 @@ namespace Shops
 
         private void User_Click(object sender, EventArgs e)
         {
-            label5.Text = "User";
+            label5.Text = "User Page";
             UserPage1 UserPage1Control = new UserPage1();
             panel3.Controls.Clear();
             UserPage1Control.Dock = DockStyle.Fill;
@@ -197,19 +199,19 @@ namespace Shops
 
         private void Petugas_Click(object sender, EventArgs e)
         {
-            label5.Text = "Petugas";
+            label5.Text = "Petugas Pagw";
             loadForm(new Petugas());
         }
 
         private void Vendor_Click(object sender, EventArgs e)
         {
-            label5.Text = "Vendor";
+            label5.Text = "Vendor Page";
             loadForm(new Vendor());
         }
 
         private void Barang_Click(object sender, EventArgs e)
         {
-            label5.Text = "Barang";
+            label5.Text = "Barang Pagw";
             Barang barangForm = new Barang();
             loadForm(barangForm);
             //barangForm.GetBarang();
@@ -217,7 +219,7 @@ namespace Shops
 
         private void Penjualan_Click(object sender, EventArgs e)
         {
-            label5.Text = "Penjualan";
+            label5.Text = "Penjualan Pagw";
 
             if (role == "Petugas")
             {
@@ -233,20 +235,20 @@ namespace Shops
 
         private void ReturnPenjualan_Click(object sender, EventArgs e)
         {
-            label5.Text = "Return Penjualan";
+            label5.Text = "Return Penjualan Pagw";
             loadForm(new ReturnPenjualan());
         }
 
         private void LapJul_Click(object sender, EventArgs e)
         {
-            label5.Text = "Laporan Jualan";
-            loadForm(new LapJul());
+            label5.Text = "Laporan Jualan Page";
+            loadForm(new LapJul(userId, role));
         }
 
         private void LapReturnJul_Click(object sender, EventArgs e)
         {
-            label5.Text = "Laporan Return Jualan";
-            loadForm(new LapReturnPenjualan());
+            label5.Text = "Laporan Return Jualan Page";
+            loadForm(new LapReturnPenjualan(userId, role));
         }
 
         private void button1_Click_1(object sender, EventArgs e)

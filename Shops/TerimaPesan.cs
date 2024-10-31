@@ -20,6 +20,7 @@ namespace Shops
             InitializeComponent();
             getPesan();
             TungguProses();
+            getLapJul();
         }
         SqlConnection conn = new SqlConnection(@"Data Source=Tamara-Desktop\SQLEXPRESS;Initial Catalog=Shop;Integrated Security=True;");
 
@@ -39,6 +40,15 @@ namespace Shops
             DataTable dt = new DataTable();
             sda.Fill(dt);
             dataGridView2.DataSource = dt;
+        }
+
+        void getLapJul()
+        {
+            SqlCommand cmd = new SqlCommand("SELECT IdPenjualan FROM LaporanPenjualan ORDER BY IdPenjualan DESC", conn);
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            dataGridView3.DataSource = dt;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

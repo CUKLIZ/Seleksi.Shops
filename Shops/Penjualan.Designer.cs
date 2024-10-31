@@ -68,10 +68,13 @@ namespace Shops
             textBox13 = new TextBox();
             button4 = new Button();
             label15 = new Label();
+            dataGridView2 = new DataGridView();
+            label13 = new Label();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             SuspendLayout();
             // 
             // groupBox1
@@ -459,11 +462,34 @@ namespace Shops
             label15.TabIndex = 17;
             label15.Text = "Total Harga";
             // 
+            // dataGridView2
+            // 
+            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView2.Location = new Point(748, 82);
+            dataGridView2.Name = "dataGridView2";
+            dataGridView2.Size = new Size(393, 415);
+            dataGridView2.TabIndex = 24;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.BackColor = SystemColors.Control;
+            label13.Font = new Font("Tahoma", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label13.ForeColor = Color.Black;
+            label13.Location = new Point(876, 51);
+            label13.Name = "label13";
+            label13.Size = new Size(123, 18);
+            label13.TabIndex = 25;
+            label13.Text = "Tunggu Di Proses";
+            label13.Click += label13_Click_1;
+            // 
             // Penjualan
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(772, 533);
+            ClientSize = new Size(1188, 500);
+            Controls.Add(label13);
+            Controls.Add(dataGridView2);
             Controls.Add(label15);
             Controls.Add(button4);
             Controls.Add(textBox13);
@@ -482,6 +508,7 @@ namespace Shops
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -532,5 +559,7 @@ namespace Shops
         private DataGridViewTextBoxColumn Column4;
         private DataGridViewTextBoxColumn Column5;
         private Button button5;
+        private DataGridView dataGridView2;
+        private Label label13;
     }
 }

@@ -35,12 +35,14 @@
             textBox1 = new TextBox();
             label1 = new Label();
             dataGridView1 = new DataGridView();
+            button3 = new Button();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(button3);
             groupBox1.Controls.Add(button2);
             groupBox1.Controls.Add(button1);
             groupBox1.Controls.Add(comboBox1);
@@ -65,7 +67,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(541, 43);
+            button1.Location = new Point(538, 43);
             button1.Name = "button1";
             button1.Size = new Size(75, 23);
             button1.TabIndex = 1;
@@ -108,6 +110,16 @@
             dataGridView1.TabIndex = 1;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
+            // button3
+            // 
+            button3.Location = new Point(586, 15);
+            button3.Name = "button3";
+            button3.Size = new Size(75, 23);
+            button3.TabIndex = 3;
+            button3.Text = "Reset";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
             // LapJul
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -134,5 +146,6 @@
         private Button button2;
         private Button button1;
         private DataGridView dataGridView1;
+        private Button button3;
     }
 }

@@ -45,9 +45,12 @@
             label6 = new Label();
             dataGridView2 = new DataGridView();
             label7 = new Label();
+            label8 = new Label();
+            dataGridView3 = new DataGridView();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView3).BeginInit();
             SuspendLayout();
             // 
             // groupBox1
@@ -64,7 +67,7 @@
             groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(textBox1);
-            groupBox1.Location = new Point(454, 70);
+            groupBox1.Location = new Point(454, 36);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(306, 346);
             groupBox1.TabIndex = 22;
@@ -216,7 +219,7 @@
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView2.Location = new Point(12, 299);
             dataGridView2.Name = "dataGridView2";
-            dataGridView2.Size = new Size(436, 222);
+            dataGridView2.Size = new Size(436, 199);
             dataGridView2.TabIndex = 23;
             dataGridView2.CellContentClick += dataGridView2_CellContentClick;
             // 
@@ -232,11 +235,34 @@
             label7.TabIndex = 24;
             label7.Text = "Tunggu Di Proses";
             // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.BackColor = SystemColors.Control;
+            label8.Font = new Font("Tahoma", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label8.ForeColor = Color.Black;
+            label8.Location = new Point(553, 385);
+            label8.Name = "label8";
+            label8.Size = new Size(115, 18);
+            label8.TabIndex = 25;
+            label8.Text = "List Id Penjualan";
+            // 
+            // dataGridView3
+            // 
+            dataGridView3.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView3.Location = new Point(454, 406);
+            dataGridView3.Name = "dataGridView3";
+            dataGridView3.Size = new Size(300, 92);
+            dataGridView3.TabIndex = 26;
+            // 
             // TerimaPesan
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(772, 533);
+            ClientSize = new Size(772, 500);
+            Controls.Add(dataGridView3);
+            Controls.Add(label8);
             Controls.Add(label7);
             Controls.Add(dataGridView2);
             Controls.Add(label6);
@@ -249,6 +275,7 @@
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView3).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -272,5 +299,7 @@
         private Label label6;
         private DataGridView dataGridView2;
         private Label label7;
+        private Label label8;
+        private DataGridView dataGridView3;
     }
 }

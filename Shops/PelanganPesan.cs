@@ -80,6 +80,14 @@ namespace Shops
                 int order = int.Parse(textBox3.Text);
                 int stockBaru = stockSekarang - order;
 
+                // Jika Stock 0
+                if (stockSekarang <= 0)
+                {
+                    MessageBox.Show("Stock Habis");
+                    return;
+                }
+
+                // Jika User Melebihi Stock
                 if (stockBaru < 0)
                 {
                     MessageBox.Show("Stock Tidak Cukup");

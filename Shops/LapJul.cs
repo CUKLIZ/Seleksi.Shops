@@ -14,19 +14,37 @@ namespace Shops
 {
     public partial class LapJul : Form
     {
-        public LapJul()
+
+        private string userId;
+        private string role;
+
+        public LapJul(string userId, string role)
         {
             InitializeComponent();
+            this.userId = userId;
+            this.role = role;
         }
         SqlConnection conn = new SqlConnection(@"Data Source=Tamara-Desktop\SQLEXPRESS;Initial Catalog=Shop;Integrated Security=True;");
 
-        void GetLapJul()
+        void GetLapJul()    
         {
-            SqlCommand cmd = new SqlCommand("SELECT IdPenjualan, IdBarang, NamaBarang, Jumlah, Harga FROM LaporanPenjualan", conn);
+            SqlCommand cmd;
+
+            if (role == "User")
+            {
+                cmd = new SqlCommand("SELECT IdPenjualan, TGLPenjualan, IdBarang, NamaBarang, Jumlah, Harga, NamaUser FROM LaporanPenjualan WHERE IdUser = @UserId", conn);
+                cmd.Parameters.AddWithValue("@UserId", userId);
+            }
+            else
+            {
+                cmd = new SqlCommand("SELECT IdPenjualan, TGLPenjualan, IdBarang, NamaBarang, Jumlah, Harga, NamaUser FROM LaporanPenjualan", conn);
+            }
+
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             sda.Fill(dt);
             dataGridView1.DataSource = dt;
+
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -38,6 +56,7 @@ namespace Shops
         {
             GetLapJul();
 
+            comboBox1.Items.Add("IdPenjualan");
             comboBox1.Items.Add("IdBarang");
             comboBox1.Items.Add("NamaBarang");
         }
@@ -60,6 +79,10 @@ namespace Shops
                 else if (input == "NamaBarang")
                 {
                     cmd = new SqlCommand("SELECT IdPenjualan, IdBarang, NamaBarang, Jumlah, Harga, (Jumlah * Harga) AS TotalHarga FROM LaporanPenjualan WHERE NamaBarang LIKE @Cari", conn);
+                }
+                else if (input == "IdPenjualan")
+                {
+                    cmd = new SqlCommand("SELECT IdPenjualan, IdBarang, NamaBarang, Jumlah, Harga, (Jumlah * Harga) AS TotalHarga FROM LaporanPenjualan WHERE IdPenjualan LIKE @Cari", conn);
                 }
                 else
                 {
@@ -100,7 +123,8 @@ namespace Shops
                 {
                     cmd = new SqlCommand("DELETE FROM LaporanPenjualan WHERE IdBarang = @Value", conn);
                     MessageBox.Show("Data Berhasil Di Hapus");
-                } else if (Input == "NamaBarang")
+                }
+                else if (Input == "NamaBarang")
                 {
                     cmd = new SqlCommand("DELETE FROM LaporanPenjualan WHERE NamaBarang = @Value", conn);
                     MessageBox.Show("Data Berhasil Di Hapus");
@@ -115,13 +139,21 @@ namespace Shops
                 cmd.ExecuteNonQuery();
 
                 GetLapJul();
-            } catch (Exception ex) 
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show("Eror");
-            } finally
+            }
+            finally
             {
                 conn.Close();
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            GetLapJul();
+            textBox1.Clear();
         }
     }
 }

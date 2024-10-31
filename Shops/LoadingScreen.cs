@@ -28,18 +28,37 @@ namespace Shops
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            panel2.Width += 3;
+            panel2.Width += 4;
 
             if (panel2.Width >= 800)
             {
+
                 timer1.Stop();
                 HomePage homePage = new HomePage(role, userId, userName);
                 homePage.Show();
+
                 this.Hide();
             }
+
+
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
         {
 
         }

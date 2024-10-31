@@ -63,10 +63,16 @@
             textBox1 = new TextBox();
             label1 = new Label();
             label15 = new Label();
+            label13 = new Label();
+            dataGridView2 = new DataGridView();
+            label4 = new Label();
+            dataGridView3 = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             groupBox3.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView3).BeginInit();
             SuspendLayout();
             // 
             // button4
@@ -74,7 +80,7 @@
             button4.BackColor = Color.Blue;
             button4.FlatStyle = FlatStyle.Flat;
             button4.Font = new Font("Tahoma", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button4.Location = new Point(620, 498);
+            button4.Location = new Point(628, 470);
             button4.Name = "button4";
             button4.Size = new Size(123, 23);
             button4.TabIndex = 22;
@@ -84,7 +90,7 @@
             // 
             // textBox13
             // 
-            textBox13.Location = new Point(620, 469);
+            textBox13.Location = new Point(628, 441);
             textBox13.Name = "textBox13";
             textBox13.Size = new Size(123, 23);
             textBox13.TabIndex = 26;
@@ -96,7 +102,7 @@
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5 });
             dataGridView1.Location = new Point(21, 252);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(730, 211);
+            dataGridView1.Size = new Size(730, 183);
             dataGridView1.StandardTab = true;
             dataGridView1.TabIndex = 21;
             // 
@@ -247,7 +253,7 @@
             groupBox2.Controls.Add(label10);
             groupBox2.Controls.Add(textBox6);
             groupBox2.Controls.Add(label6);
-            groupBox2.Location = new Point(273, 80);
+            groupBox2.Location = new Point(278, 12);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(224, 98);
             groupBox2.TabIndex = 20;
@@ -397,17 +403,62 @@
             // 
             label15.AutoSize = true;
             label15.Font = new Font("Tahoma", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label15.Location = new Point(535, 476);
+            label15.Location = new Point(543, 448);
             label15.Name = "label15";
             label15.Size = new Size(82, 16);
             label15.TabIndex = 28;
             label15.Text = "Total Harga";
             // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.BackColor = SystemColors.Control;
+            label13.Font = new Font("Tahoma", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label13.ForeColor = Color.Black;
+            label13.Location = new Point(892, 43);
+            label13.Name = "label13";
+            label13.Size = new Size(123, 18);
+            label13.TabIndex = 30;
+            label13.Text = "Tunggu Di Proses";
+            // 
+            // dataGridView2
+            // 
+            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView2.Location = new Point(764, 74);
+            dataGridView2.Name = "dataGridView2";
+            dataGridView2.Size = new Size(393, 415);
+            dataGridView2.TabIndex = 29;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.BackColor = SystemColors.Control;
+            label4.Font = new Font("Tahoma", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label4.ForeColor = Color.Black;
+            label4.Location = new Point(284, 121);
+            label4.Name = "label4";
+            label4.Size = new Size(187, 18);
+            label4.TabIndex = 31;
+            label4.Text = "list Id Return Yg sudah ada";
+            // 
+            // dataGridView3
+            // 
+            dataGridView3.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView3.Location = new Point(251, 143);
+            dataGridView3.Name = "dataGridView3";
+            dataGridView3.Size = new Size(270, 97);
+            dataGridView3.TabIndex = 32;
+            // 
             // ReturnPenjualan
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(772, 533);
+            ClientSize = new Size(1188, 500);
+            Controls.Add(dataGridView3);
+            Controls.Add(label4);
+            Controls.Add(label13);
+            Controls.Add(dataGridView2);
             Controls.Add(label15);
             Controls.Add(button4);
             Controls.Add(textBox13);
@@ -425,6 +476,8 @@
             groupBox2.PerformLayout();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView3).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -465,5 +518,9 @@
         private DataGridViewTextBoxColumn Column3;
         private DataGridViewTextBoxColumn Column4;
         private DataGridViewTextBoxColumn Column5;
+        private Label label13;
+        private DataGridView dataGridView2;
+        private Label label4;
+        private DataGridView dataGridView3;
     }
 }

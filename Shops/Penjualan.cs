@@ -23,7 +23,7 @@ namespace Shops
 
         private void Penjualan_Load(object sender, EventArgs e)
         {
-
+            GetList();
         }
 
         private void label12_Click(object sender, EventArgs e)
@@ -201,8 +201,8 @@ namespace Shops
                 }
 
                 cmd.ExecuteNonQuery();
-                
-                int jumlah = int.Parse(textBox7.Text); 
+
+                int jumlah = int.Parse(textBox7.Text);
                 SqlCommand updateStockCmd = new SqlCommand("UPDATE Barangs SET Stock = Stock - @Jumlah WHERE IdBarang = @IdBarang", conn);
                 updateStockCmd.Parameters.AddWithValue("@Jumlah", jumlah);
                 updateStockCmd.Parameters.AddWithValue("@IdBarang", textBox9.Text);
@@ -223,6 +223,7 @@ namespace Shops
                 textBox3.Clear();
                 textBox1.Clear();
                 dataGridView1.Rows.Clear();
+                GetList();
             }
             catch (Exception ex)
             {
@@ -250,7 +251,7 @@ namespace Shops
                 SqlCommand cmd = new SqlCommand("SELECT IdBarang, NamaBarang, Jumlah, Harga, IdUser, NamaUser FROM Penjualan WHERE IdPenjualan = @IdPenjualan", conn);
                 cmd.Parameters.AddWithValue("@IdPenjualan", IdPenjualan);
                 SqlDataReader reader = cmd.ExecuteReader();
-                
+
                 if (reader.Read())
                 {
                     textBox9.Text = reader["IdBarang"].ToString();
@@ -278,18 +279,36 @@ namespace Shops
 
                     stockReader.Close();
 
-                } else
+                }
+                else
                 {
                     MessageBox.Show("Data Tidak Di Temukan");
                 }
                 reader.Close();
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show("Error" + ex.Message);
-            } finally
+            }
+            finally
             {
                 conn.Close();
             }
+
+        } 
+        
+
+        void GetList()
+        {
+            SqlCommand cmd = new SqlCommand("SELECT IdPenjualan ,IdBarang, NamaBarang, Jumlah, Harga, NamaVendor, Idven FROM Penjualan", conn);
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            dataGridView2.DataSource = dt;
+        }
+
+        private void label13_Click_1(object sender, EventArgs e)
+        {
 
         }
     }

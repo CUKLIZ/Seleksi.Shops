@@ -13,21 +13,37 @@ namespace Shops
 {
     public partial class LapReturnPenjualan : Form
     {
-        public LapReturnPenjualan()
+
+        private string userId;
+        private string role;
+        public LapReturnPenjualan(string userId, string role)
         {
             InitializeComponent();
             this.Load += new System.EventHandler(this.LapReturnPenjualan_Load);
+            this.userId = userId;
+            this.role = role;
         }
         SqlConnection conn = new SqlConnection(@"Data Source=Tamara-Desktop\SQLEXPRESS;Initial Catalog=Shop;Integrated Security=True;");
 
 
         void GetLapReturn()
         {
-            SqlCommand cmd = new SqlCommand("SELECT IdReturn, IdBarang, NamaBarang, Jumlah, Harga FROM ReturnPenjualan", conn);
+            SqlCommand cmd;
+
+            if (role == "User")
+            {
+                cmd = new SqlCommand("SELECT * FROM ReturnPenjualan WHERE IdUser = @IdUser", conn);
+                cmd.Parameters.AddWithValue("@IdUser", userId);
+            } else
+            {
+                cmd = new SqlCommand("SELECT * FROM ReturnPenjualan", conn);
+            }
+
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             sda.Fill(dt);
             dataGridView1.DataSource = dt;
+
         }
 
         private void LapReturnPenjualan_Load(object sender, EventArgs e)

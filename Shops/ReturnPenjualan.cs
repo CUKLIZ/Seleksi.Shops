@@ -16,8 +16,15 @@ namespace Shops
         public ReturnPenjualan()
         {
             InitializeComponent();
+            this.Load += new System.EventHandler(this.ReturnPenjualan_Load);
         }
         SqlConnection conn = new SqlConnection(@"Data Source=Tamara-Desktop\SQLEXPRESS;Initial Catalog=Shop;Integrated Security=True;");
+
+        private void ReturnPenjualan_Load(object sender, EventArgs e)
+        {
+            Proses();
+            GetLapReturnId();
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -137,6 +144,8 @@ namespace Shops
         {
             string IdPenjualan = textBox1.Text;
             string IdReturn = textBox6.Text;
+            string IdUser = textBox3.Text;
+            string NamaUser = textBox14.Text;
 
             try
             {
@@ -151,8 +160,8 @@ namespace Shops
                         int Jumlah = Convert.ToInt32(row.Cells[3].Value);
                         int Harga = Convert.ToInt32(row.Cells[4].Value);
 
-                        SqlCommand cmd = new SqlCommand("INSERT INTO ReturnPenjualan (IdReturn, IdPenjualan, IdBarang, NamaBarang, Jumlah, Harga) " +
-                            "VALUES (@IdReturn, @IdPenjualan, @IdBarang, @NamaBarang, @Jumlah, @Harga) ", conn);
+                        SqlCommand cmd = new SqlCommand("INSERT INTO ReturnPenjualan (IdReturn, IdPenjualan, IdBarang, NamaBarang, Jumlah, Harga, IdUser, NamaUser) " +
+                            "VALUES (@IdReturn, @IdPenjualan, @IdBarang, @NamaBarang, @Jumlah, @Harga, @IdUser, @NamaUser) ", conn);
 
                         cmd.Parameters.AddWithValue("@IdReturn", IdReturn);
                         cmd.Parameters.AddWithValue("@IdPenjualan", IdPenjualan);
@@ -160,27 +169,49 @@ namespace Shops
                         cmd.Parameters.AddWithValue("@NamaBarang", NamaBarang);
                         cmd.Parameters.AddWithValue("@Jumlah", Jumlah);
                         cmd.Parameters.AddWithValue("@Harga", Harga);
+                        cmd.Parameters.AddWithValue("@IdUser", IdUser);
+                        cmd.Parameters.AddWithValue("@NamaUser", NamaUser);
 
                         cmd.ExecuteNonQuery();
                     }
                 }
 
-                //SqlCommand Delete = new SqlCommand("DELETE FROM Penjualan WHERE IdPenjualan = @IdPenjualan", conn);
-                //Delete.Parameters.AddWithValue("@IdPenjualan", IdPenjualan);
-                //Delete.ExecuteNonQuery();
+                SqlCommand Delete = new SqlCommand("DELETE FROM Penjualan WHERE IdPenjualan = @IdPenjualan", conn);
+                Delete.Parameters.AddWithValue("@IdPenjualan", IdPenjualan);
+                Delete.ExecuteNonQuery();
 
                 MessageBox.Show("Barang Berhasil Di Return");
 
                 textBox1.Clear();
                 textBox6.Clear();
                 dataGridView1.Rows.Clear();
-            } catch 
+                GetLapReturnId();
+                Proses();
+            }
+            catch 
             {
                 MessageBox.Show("Error");
             } finally
             {
                 conn.Close();
-            }
+            }            
+        }
+        void Proses()
+        {
+            SqlCommand cmd = new SqlCommand("SELECT IdPenjualan ,IdBarang, NamaBarang, Jumlah, Harga, NamaVendor, Idven FROM Penjualan", conn);
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            dataGridView2.DataSource = dt;
+        }
+
+        void GetLapReturnId()
+        {
+            SqlCommand cmd = new SqlCommand("SELECT IdReturn FROM ReturnPenjualan ORDER BY IdReturn DESC", conn);
+            SqlDataAdapter sda = new SqlDataAdapter(cmd); 
+            DataTable dt = new DataTable();
+            sda.Fill(dt);
+            dataGridView3.DataSource = dt;
         }
     }
 }

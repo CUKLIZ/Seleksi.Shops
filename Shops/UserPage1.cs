@@ -19,6 +19,9 @@ namespace Shops
         {
             InitializeComponent();
             LoadDataUser(); // Untuk Me Load Users
+
+            button2.Visible = false;
+            button3.Visible = false;
         }
 
         void LoadDataUser()
@@ -47,18 +50,20 @@ namespace Shops
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-                if (e.RowIndex >= 0)
+            if (e.RowIndex >= 0 && dataGridView1.Rows[e.RowIndex].Cells["Id"].Value != null)
+            {
+                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                string selectedUserId = row.Cells["Id"].Value.ToString();
+
+                try
                 {
-                    DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
-                    string selectedUserId = row.Cells["Id"].Value.ToString();
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("SELECT Username, Password FROM Login WHERE Id = @Id", conn);
+                    cmd.Parameters.AddWithValue("@Id", selectedUserId);
 
-                    try
+                    //SqlDataReader reader = cmd.ExecuteReader();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        conn.Open();
-                        SqlCommand cmd = new SqlCommand("SELECT Username, Password FROM Login WHERE Id = @Id", conn);
-                        cmd.Parameters.AddWithValue("@Id", selectedUserId);
-
-                        SqlDataReader reader = cmd.ExecuteReader();
                         if (reader.Read())
                         {
                             textBox1.Text = selectedUserId;
@@ -66,17 +71,20 @@ namespace Shops
                             textBox3.Text = reader["Username"].ToString();
                             textBox4.Text = reader["Password"].ToString();
                         }
+
                         reader.Close();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error: " + ex.Message);
-                    }
-                    finally
-                    {
-                        conn.Close();
+
                     }
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+                finally
+                {
+                        conn.Close();
+                }
+            }
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -98,7 +106,7 @@ namespace Shops
                     conn.Open();
                     SqlCommand cmd = new SqlCommand("INSERT INTO Login(Id, Nama, Username, Password, Role) VALUES (@Id, @Nama, @Username, @Password, 'User')", conn);
 
-                    cmd.Parameters.AddWithValue("@Id", textBox1.Text);
+                    cmd.Parameters.AddWithValue("@Id", textBox1.Text);  
                     cmd.Parameters.AddWithValue("@Nama", textBox2.Text);
                     cmd.Parameters.AddWithValue("@Username", textBox3.Text);
                     cmd.Parameters.AddWithValue("@Password", textBox4.Text);
@@ -195,6 +203,11 @@ namespace Shops
             textBox2.Clear();
             textBox3.Clear();
             textBox4.Clear();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {                      
+            
         }
     }
 }
