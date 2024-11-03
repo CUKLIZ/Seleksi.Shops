@@ -19,6 +19,13 @@ namespace Shops
             InitializeComponent();
             LoadVendors();
             GetBarang();
+
+            button1.Visible = true;
+            button2.Visible = false;
+            button3.Visible = false;
+
+            textBox1.TextChanged += textBox1_TextChanged;
+
         }
         SqlConnection conn = new SqlConnection(@"Data Source=Tamara-Desktop\SQLEXPRESS;Initial Catalog=Shop;Integrated Security=True;");
 
@@ -58,6 +65,8 @@ namespace Shops
                 comboBox1.SelectedValue = row.Cells["Idven"].Value.ToString();
 
                 //textBox1.ReadOnly = true;
+                button2.Visible = true;
+                button3.Visible = true;
             }
         }
 
@@ -84,18 +93,24 @@ namespace Shops
             cmd.ExecuteNonQuery();
             conn.Close();
 
+            button1.Visible = true;
+            button2.Visible = false;
+            button3.Visible = false;
+
             MessageBox.Show("Barang Berhasil Ditambah");
             GetBarang();
             textBox1.Clear();
             textBox2.Clear();
             textBox3.Clear();
             textBox4.Clear();
+
+
         }
 
         // Buat Nampilin Barang Di Dalam Panel Barang
         void GetBarang()
         {
-            SqlCommand cmd = new SqlCommand("SELECT IdBarang, NamaBarang, Stock, Harga, NamaVendor, Idven FROM Barangs", conn);
+            SqlCommand cmd = new SqlCommand("SELECT IdBarang, NamaBarang, Stock, Harga, NamaVendor, Idven FROM Barangs ORDER BY IdBarang DESC", conn);
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             sda.Fill(dt);
@@ -128,6 +143,10 @@ namespace Shops
                 cmd.ExecuteNonQuery();
                 conn.Close();
 
+                button1.Visible = true;
+                button2.Visible = false;
+                button3.Visible = false;
+
                 MessageBox.Show("Data Berhasil Di Edit");
                 GetBarang();
 
@@ -157,7 +176,7 @@ namespace Shops
             SqlCommand cmd = new SqlCommand("DELETE Barangs WHERE IdBarang=@IdBarang", conn);
             cmd.Parameters.AddWithValue("@IdBarang", textBox1.Text);
 
-            int rowsAffected = cmd.ExecuteNonQuery(); 
+            int rowsAffected = cmd.ExecuteNonQuery();
             conn.Close();
 
             if (rowsAffected > 0)
@@ -175,6 +194,51 @@ namespace Shops
             textBox2.Clear();
             textBox3.Clear();
             textBox4.Clear();
+        }
+
+        private bool CheckIdExists(string id)
+        {
+            try
+            {
+                using (SqlConnection tempConn = new SqlConnection(conn.ConnectionString))
+                {
+                    tempConn.Open();
+                    using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM Login WHERE Id = @Id", tempConn))
+                    {
+                        cmd.Parameters.AddWithValue("@Id", id);
+                        int count = (int)cmd.ExecuteScalar();
+                        return count > 0;
+                    }
+                }
+            } catch (Exception ex)
+            {
+                MessageBox.Show("Error", ex.Message);
+                return false;
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(textBox1.Text))
+            {
+                bool idSekarang = CheckIdExists(textBox1.Text);
+
+                button1.Visible = !idSekarang;
+                button2.Visible = idSekarang;
+                button3.Visible = idSekarang;
+
+                if (idSekarang)
+                {
+                    textBox2.Clear();
+                    textBox3.Clear();
+                    textBox4.Clear();
+                }
+            } else
+            {
+                button1.Visible = true;
+                button2.Visible = false;
+                button3.Visible = false;
+            }
         }
     }
 }

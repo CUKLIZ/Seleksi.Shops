@@ -38,8 +38,9 @@ namespace Shops
 
         private void LoginBTN_Click(object sender, EventArgs e)
         {
-            String username, password, role;
+            String Nama ,username, password, role;
 
+            Nama = UsernameBox.Text;
             username = UsernameBox.Text;
             password = PasswordBox.Text;
 
@@ -47,8 +48,9 @@ namespace Shops
             {
                 // Query untuk mengambil Role berdasarkan Username dan Password
                 //string query = "SELECT Role FROM Login WHERE Username = @username AND Password = @password";
-                string query = "SELECT Id, Role FROM Login WHERE Username = @username AND Password = @password";
+                string query = "SELECT Id, Role FROM Login WHERE Username = @username OR Nama = @Nama AND Password = @password";
                 SqlDataAdapter sda = new SqlDataAdapter(query, conn);
+                sda.SelectCommand.Parameters.AddWithValue("@Nama", Nama);
                 sda.SelectCommand.Parameters.AddWithValue("@username", username);
                 sda.SelectCommand.Parameters.AddWithValue("@password", password);
 

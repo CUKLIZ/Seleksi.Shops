@@ -20,8 +20,33 @@ namespace Shops
             InitializeComponent();
             LoadDataUser(); // Untuk Me Load Users
 
+            button1.Visible = true;
             button2.Visible = false;
-            button3.Visible = false;
+            button3.Visible = false;            
+
+            textBox1.TextChanged += textBox1_TextChanged;
+        }
+
+        // Cek apakah Id sudah ada di dalam database atau belum
+        private bool CheckIdExists(string id)
+        {
+            try
+            {
+                using (SqlConnection tempConn = new SqlConnection(conn.ConnectionString))
+                {
+                    tempConn.Open();
+                    using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM Login WHERE Id = @Id", tempConn))
+                    {
+                        cmd.Parameters.AddWithValue("@Id", id);
+                        int count = (int)cmd.ExecuteScalar();
+                        return count > 0;
+                    }                    
+                }
+            } catch (Exception ex)
+            {
+                MessageBox.Show("Error ", ex.Message);
+                return false;
+            }
         }
 
         void LoadDataUser()
@@ -29,7 +54,7 @@ namespace Shops
             try
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT Id, Nama FROM Login WHERE Role = 'User'", conn);
+                SqlCommand cmd = new SqlCommand("SELECT Id, Nama, Username FROM Login WHERE Role = 'User' ORDER BY Id DESC", conn);
 
                 SqlDataAdapter sda = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
@@ -72,7 +97,9 @@ namespace Shops
                             textBox4.Text = reader["Password"].ToString();
                         }
 
-                        reader.Close();
+                        //reader.Close();
+                        button2.Visible = true;
+                        button3.Visible = true;
 
                     }
                 }
@@ -119,6 +146,10 @@ namespace Shops
                     textBox3.Text = "";
                     textBox4.Text = "";
 
+                    button1.Visible = true; // Menampilkan Button
+                    button2.Visible = false; // Menghilangan Button
+                    button3.Visible = false; // Menghilangan Button
+
                     conn.Close();
                     LoadDataUser();
 
@@ -164,6 +195,16 @@ namespace Shops
                 cmd.ExecuteNonQuery();
                 conn.Close();
 
+                textBox1.Text = "";
+                textBox2.Text = "";
+                textBox3.Text = "";
+                textBox4.Text = "";
+
+                button1.Visible = true;
+                button2.Visible = false;
+                button3.Visible = false;
+
+
                 MessageBox.Show("Data Berhasil Di Edit");
                 LoadDataUser();
 
@@ -207,7 +248,27 @@ namespace Shops
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {                      
-            
+            if (!string.IsNullOrWhiteSpace(textBox1.Text))
+            {
+                bool IdSekarang = CheckIdExists(textBox1.Text);
+
+                button1.Visible = !IdSekarang; // Hide submit button if ID exists
+                button2.Visible = IdSekarang;
+                button3.Visible = IdSekarang;
+
+                // Jika Id di Text box tidak ada
+                if (!IdSekarang)
+                {
+                    textBox2.Text = "";
+                    textBox3.Text = "";
+                    textBox4.Text = "";
+                }
+            } else
+            {
+                button1.Visible = true; 
+                button2.Visible = false;
+                button3.Visible = false;
+            }
         }
     }
 }

@@ -17,6 +17,12 @@ namespace Shops
         public Vendor()
         {
             InitializeComponent();
+
+            button1.Visible = true;
+            button2.Visible = false;
+            button3.Visible = false;
+
+            textBox1.TextChanged += textBox1_TextChanged;
             this.Load += new System.EventHandler(this.Vendor_Load);
         }
         SqlConnection conn = new SqlConnection(@"Data Source=Tamara-Desktop\SQLEXPRESS;Initial Catalog=Shop;Integrated Security=True;");
@@ -29,7 +35,7 @@ namespace Shops
 
         void GetVendor()
         {
-            SqlCommand cmd = new SqlCommand("SELECT * FROM Vendors", conn);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Vendors ORDER BY IdVendor DESC", conn);
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             sda.Fill(dt);
@@ -44,6 +50,9 @@ namespace Shops
 
                 textBox1.Text = row.Cells["IdVendor"].Value.ToString();
                 textBox2.Text = row.Cells["namaVendor"].Value.ToString();
+
+                button2.Visible = true;
+                button3.Visible = true;
             }
         }
 
@@ -61,6 +70,10 @@ namespace Shops
 
             textBox1.Clear();
             textBox2.Clear();
+
+            button1.Visible = true;
+            button2.Visible = false;
+            button3.Visible = false;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -73,6 +86,13 @@ namespace Shops
             conn.Close();
 
             MessageBox.Show("Data Berhasil Di Edit");
+
+            textBox1.Clear();
+            textBox2.Clear();
+
+            button1.Visible = true;
+            button2.Visible = false;
+            button3.Visible = false;
 
             GetVendor();
         }
@@ -89,6 +109,50 @@ namespace Shops
             GetVendor();
             textBox1.Clear();
             textBox2.Clear();
+        }
+
+        private bool CheckIdExists(string id)
+        {
+            try
+            {
+                using (SqlConnection tempConn = new SqlConnection(conn.ConnectionString))
+                {
+                    tempConn.Open();
+                    using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM Login WHERE Id = @Id", tempConn))
+                    {
+                        cmd.Parameters.AddWithValue("@Id", id);
+                        int count = (int)cmd.ExecuteScalar();
+                        return count > 0;
+                    }
+                }
+            } catch (Exception ex)
+            {
+                MessageBox.Show("Error", ex.Message);
+                return false;
+            }
+        }
+
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(textBox1.Text))
+            {
+                bool idSekarang = CheckIdExists(textBox1.Text);
+
+                button1.Visible = !idSekarang;
+                button2.Visible = idSekarang;
+                button3.Visible = idSekarang;
+
+                if (!idSekarang)
+                {
+                    textBox2.Text = "";
+                }
+            } else
+            {
+                button1.Visible = true;
+                button2.Visible = false;
+                button3.Visible = false;
+            }
         }
     }
 }

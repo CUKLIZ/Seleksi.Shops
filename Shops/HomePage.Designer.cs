@@ -68,7 +68,7 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1386, 33);
+            panel1.Size = new Size(1370, 33);
             panel1.TabIndex = 0;
             panel1.Paint += panel1_Paint;
             // 
@@ -78,7 +78,7 @@
             label5.BackColor = Color.FromArgb(33, 11, 97);
             label5.Font = new Font("Tahoma", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label5.ForeColor = Color.White;
-            label5.Location = new Point(637, 3);
+            label5.Location = new Point(693, 8);
             label5.Name = "label5";
             label5.Size = new Size(65, 18);
             label5.TabIndex = 17;
@@ -90,7 +90,7 @@
             label4.BackColor = Color.FromArgb(33, 11, 97);
             label4.Font = new Font("Tahoma", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.White;
-            label4.Location = new Point(369, 8);
+            label4.Location = new Point(561, 8);
             label4.Name = "label4";
             label4.Size = new Size(41, 18);
             label4.TabIndex = 4;
@@ -103,7 +103,7 @@
             label3.BackColor = Color.FromArgb(33, 11, 97);
             label3.Font = new Font("Tahoma", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(168, 8);
+            label3.Location = new Point(365, 8);
             label3.Name = "label3";
             label3.Size = new Size(113, 18);
             label3.TabIndex = 3;
@@ -116,7 +116,7 @@
             label2.BackColor = Color.FromArgb(33, 11, 97);
             label2.Font = new Font("Tahoma", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(23, 8);
+            label2.Location = new Point(43, 8);
             label2.Name = "label2";
             label2.Size = new Size(107, 18);
             label2.TabIndex = 2;
@@ -130,7 +130,7 @@
             label1.Cursor = Cursors.Hand;
             label1.Font = new Font("Tahoma", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(1360, 8);
+            label1.Location = new Point(1344, 8);
             label1.Name = "label1";
             label1.Size = new Size(17, 18);
             label1.TabIndex = 1;
@@ -146,9 +146,9 @@
             button1.FlatStyle = FlatStyle.Flat;
             button1.Font = new Font("Tahoma", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             button1.ForeColor = Color.White;
-            button1.Location = new Point(925, 3);
+            button1.Location = new Point(1181, 3);
             button1.Name = "button1";
-            button1.Size = new Size(198, 28);
+            button1.Size = new Size(134, 28);
             button1.TabIndex = 16;
             button1.Text = "Log Out";
             button1.UseVisualStyleBackColor = true;
@@ -425,7 +425,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 14F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1386, 533);
+            ClientSize = new Size(1370, 533);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(panel3);
             Controls.Add(panel1);

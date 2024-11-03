@@ -172,7 +172,7 @@ namespace Shops
 
         private void Pesan_Click(object sender, EventArgs e)
         {   
-            label5.Text = "Pesan Pagw";
+            label5.Text = "Pesan Page";
             PelanganPesan pelanganPesanControl = new PelanganPesan(userId, userName);
             panel3.Controls.Clear();
             panel3.Controls.Add(pelanganPesanControl);
@@ -199,7 +199,7 @@ namespace Shops
 
         private void Petugas_Click(object sender, EventArgs e)
         {
-            label5.Text = "Petugas Pagw";
+            label5.Text = "Petugas Page";
             loadForm(new Petugas());
         }
 
@@ -211,7 +211,7 @@ namespace Shops
 
         private void Barang_Click(object sender, EventArgs e)
         {
-            label5.Text = "Barang Pagw";
+            label5.Text = "Barang Page";
             Barang barangForm = new Barang();
             loadForm(barangForm);
             //barangForm.GetBarang();
@@ -219,7 +219,7 @@ namespace Shops
 
         private void Penjualan_Click(object sender, EventArgs e)
         {
-            label5.Text = "Penjualan Pagw";
+            label5.Text = "Penjualan Page";
 
             if (role == "Petugas")
             {
@@ -235,7 +235,7 @@ namespace Shops
 
         private void ReturnPenjualan_Click(object sender, EventArgs e)
         {
-            label5.Text = "Return Penjualan Pagw";
+            label5.Text = "Return Penjualan Page";
             loadForm(new ReturnPenjualan());
         }
 
