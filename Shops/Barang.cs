@@ -203,16 +203,17 @@ namespace Shops
                 using (SqlConnection tempConn = new SqlConnection(conn.ConnectionString))
                 {
                     tempConn.Open();
-                    using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM Login WHERE Id = @Id", tempConn))
+                    using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM Barangs WHERE IdBarang = @IdBarang", tempConn))
                     {
-                        cmd.Parameters.AddWithValue("@Id", id);
+                        cmd.Parameters.AddWithValue("@IdBarang", id);
                         int count = (int)cmd.ExecuteScalar();
                         return count > 0;
                     }
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
-                MessageBox.Show("Error", ex.Message);
+                MessageBox.Show("Error: " + ex.Message);
                 return false;
             }
         }
