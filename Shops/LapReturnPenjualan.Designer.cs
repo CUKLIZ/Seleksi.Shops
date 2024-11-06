@@ -35,17 +35,19 @@
             button1 = new Button();
             comboBox1 = new ComboBox();
             textBox1 = new TextBox();
+            Print = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // dataGridView1
             // 
+            dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(26, 115);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(721, 401);
+            dataGridView1.Size = new Size(721, 378);
             dataGridView1.TabIndex = 3;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
@@ -109,11 +111,25 @@
             textBox1.Size = new Size(186, 23);
             textBox1.TabIndex = 1;
             // 
+            // Print
+            // 
+            Print.BackColor = Color.FromArgb(41, 128, 185);
+            Print.FlatStyle = FlatStyle.Flat;
+            Print.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Print.Location = new Point(599, 499);
+            Print.Name = "Print";
+            Print.Size = new Size(148, 35);
+            Print.TabIndex = 9;
+            Print.Text = "Print";
+            Print.UseVisualStyleBackColor = false;
+            Print.Click += Print_Click;
+            // 
             // LapReturnPenjualan
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(772, 533);
+            ClientSize = new Size(772, 546);
+            Controls.Add(Print);
             Controls.Add(dataGridView1);
             Controls.Add(groupBox1);
             FormBorderStyle = FormBorderStyle.None;
@@ -134,5 +150,6 @@
         private ComboBox comboBox1;
         private TextBox textBox1;
         private Label label1;
+        private Button Print;
     }
 }

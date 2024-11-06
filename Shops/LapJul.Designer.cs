@@ -29,13 +29,14 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
+            button3 = new Button();
             button2 = new Button();
             button1 = new Button();
             comboBox1 = new ComboBox();
             textBox1 = new TextBox();
             label1 = new Label();
             dataGridView1 = new DataGridView();
-            button3 = new Button();
+            Print = new Button();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
@@ -54,6 +55,16 @@
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Laporan Penjualan";
+            // 
+            // button3
+            // 
+            button3.Location = new Point(586, 15);
+            button3.Name = "button3";
+            button3.Size = new Size(75, 23);
+            button3.TabIndex = 3;
+            button3.Text = "Reset";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // button2
             // 
@@ -82,6 +93,7 @@
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(179, 23);
             comboBox1.TabIndex = 1;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // textBox1
             // 
@@ -102,29 +114,34 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(22, 110);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(721, 401);
+            dataGridView1.Size = new Size(721, 381);
             dataGridView1.TabIndex = 1;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
-            // button3
+            // Print
             // 
-            button3.Location = new Point(586, 15);
-            button3.Name = "button3";
-            button3.Size = new Size(75, 23);
-            button3.TabIndex = 3;
-            button3.Text = "Reset";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
+            Print.BackColor = Color.FromArgb(41, 128, 185);
+            Print.FlatStyle = FlatStyle.Flat;
+            Print.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Print.Location = new Point(595, 497);
+            Print.Name = "Print";
+            Print.Size = new Size(148, 35);
+            Print.TabIndex = 8;
+            Print.Text = "Print";
+            Print.UseVisualStyleBackColor = false;
+            Print.Click += Print_Click;
             // 
             // LapJul
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(772, 533);
+            ClientSize = new Size(772, 546);
+            Controls.Add(Print);
             Controls.Add(dataGridView1);
             Controls.Add(groupBox1);
             FormBorderStyle = FormBorderStyle.None;
@@ -147,5 +164,6 @@
         private Button button1;
         private DataGridView dataGridView1;
         private Button button3;
+        private Button Print;
     }
 }

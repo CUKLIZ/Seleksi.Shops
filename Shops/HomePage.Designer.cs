@@ -360,7 +360,7 @@
             // 
             panel3.Location = new Point(198, 33);
             panel3.Name = "panel3";
-            panel3.Size = new Size(1188, 500);
+            panel3.Size = new Size(1188, 560);
             panel3.TabIndex = 2;
             panel3.Paint += panel3_Paint;
             // 
@@ -384,7 +384,7 @@
             flowLayoutPanel1.Dock = DockStyle.Left;
             flowLayoutPanel1.Location = new Point(0, 33);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(200, 500);
+            flowLayoutPanel1.Size = new Size(200, 560);
             flowLayoutPanel1.TabIndex = 14;
             // 
             // Pesan
@@ -425,7 +425,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 14F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1370, 533);
+            ClientSize = new Size(1370, 593);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(panel3);
             Controls.Add(panel1);

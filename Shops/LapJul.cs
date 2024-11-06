@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Buffers;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.IO;
 
 namespace Shops
 {
@@ -25,8 +28,9 @@ namespace Shops
             this.role = role;
         }
         SqlConnection conn = new SqlConnection(@"Data Source=Tamara-Desktop\SQLEXPRESS;Initial Catalog=Shop;Integrated Security=True;");
+        private object pageSize;
 
-        void GetLapJul()    
+        void GetLapJul()
         {
             SqlCommand cmd;
 
@@ -154,6 +158,63 @@ namespace Shops
         {
             GetLapJul();
             textBox1.Clear();
+        }
+
+        public void exportToPdt(DataGridView dgw, string fileName)
+        {
+            BaseFont bf = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1250, BaseFont.EMBEDDED);
+            PdfPTable pdfPTable = new PdfPTable(dgw.Columns.Count);
+            pdfPTable.DefaultCell.Padding = 3;
+            pdfPTable.WidthPercentage = 100;
+            pdfPTable.HorizontalAlignment = Element.ALIGN_LEFT;
+            pdfPTable.DefaultCell.BorderWidth = 1;
+
+
+            iTextSharp.text.Font text = new iTextSharp.text.Font(bf , 10, iTextSharp.text.Font.NORMAL); 
+            // Add Header
+            foreach (DataGridViewColumn column in dgw.Columns)
+            {
+                PdfPCell cell = new PdfPCell(new Phrase(column.HeaderText, text));
+                cell.BackgroundColor = new iTextSharp.text.BaseColor(240, 240, 240);
+                pdfPTable.AddCell(cell);
+
+            } 
+
+            // Add Data Row
+            foreach (DataGridViewRow row in dgw.Rows)
+            {
+                foreach(DataGridViewCell cell in row.Cells)
+                {
+                    pdfPTable.AddCell(new Phrase(cell.Value.ToString(), text));
+                }
+            }
+
+            var saveFileDialog = new SaveFileDialog();
+            saveFileDialog.FileName = fileName;
+            saveFileDialog.DefaultExt = ".pdf";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                using (FileStream stream = new FileStream(saveFileDialog.FileName, FileMode.Create))
+                {
+                    Document pdfdoc = new Document(PageSize.A4, 10f, 10f, 10f, 0f);
+                    PdfWriter.GetInstance(pdfdoc, stream);
+                    pdfdoc.Open();
+                    pdfdoc.Add(pdfPTable);
+                    pdfdoc.Close();
+                    stream.Close();
+                }
+            }
+
+        }
+
+        private void Print_Click(object sender, EventArgs e)
+        {
+            exportToPdt(dataGridView1, "Laporan Penjualan");
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

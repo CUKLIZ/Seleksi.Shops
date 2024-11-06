@@ -1,4 +1,6 @@
-﻿using System;
+﻿using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -34,7 +36,8 @@ namespace Shops
             {
                 cmd = new SqlCommand("SELECT * FROM ReturnPenjualan WHERE IdUser = @IdUser", conn);
                 cmd.Parameters.AddWithValue("@IdUser", userId);
-            } else
+            }
+            else
             {
                 cmd = new SqlCommand("SELECT * FROM ReturnPenjualan", conn);
             }
@@ -113,6 +116,57 @@ namespace Shops
             GetLapReturn();
 
             textBox1.Clear();
+        }
+
+        public void exportToPdt(DataGridView dgw, string fileName)
+        {
+            BaseFont bf = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1250, BaseFont.EMBEDDED);
+            PdfPTable pdfPTable = new PdfPTable(dgw.Columns.Count);
+            pdfPTable.DefaultCell.Padding = 3;
+            pdfPTable.WidthPercentage = 100;
+            pdfPTable.HorizontalAlignment = Element.ALIGN_LEFT;
+            pdfPTable.DefaultCell.BorderWidth = 1;
+
+            iTextSharp.text.Font text = new iTextSharp.text.Font(bf, 10, iTextSharp.text.Font.NORMAL);
+
+            // Add Header
+            foreach (DataGridViewColumn column in dgw.Columns)
+            {
+                PdfPCell cell = new PdfPCell(new Phrase(column.HeaderText, text));
+                pdfPTable.AddCell(cell);
+            }
+
+            // Add Data Row
+            foreach (DataGridViewRow row in dgw.Rows)
+            {
+                foreach (DataGridViewCell cell in row.Cells)
+                {
+                    pdfPTable.AddCell(new Phrase(cell.Value.ToString(), text));
+                }
+            }
+
+            var saveFileDialog = new SaveFileDialog();
+            saveFileDialog.FileName = fileName;
+            saveFileDialog.DefaultExt = ".pdf";
+
+            if(saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                using (FileStream stream = new FileStream(saveFileDialog.FileName, FileMode.Create))
+                {
+                    Document pdfdoc = new Document(PageSize.A4, 10f, 10f, 10f, 0f);
+                    PdfWriter.GetInstance(pdfdoc, stream);
+                    pdfdoc.Open();
+                    pdfdoc.Add(pdfPTable);
+                    pdfdoc.Close();
+                    stream.Close();
+                }
+            }
+
+        }
+
+        private void Print_Click(object sender, EventArgs e)
+        {
+            exportToPdt(dataGridView1, "Laporan Return Penjualan");
         }
     }
 }
