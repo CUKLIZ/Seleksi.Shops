@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using Microsoft.VisualBasic.ApplicationServices;
 using System.Transactions;
+using System.DirectoryServices.ActiveDirectory;
 
 namespace Shops
 {
@@ -52,7 +53,7 @@ namespace Shops
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {          
+        {
 
             // Validasi input fields
             if (string.IsNullOrEmpty(textBox1.Text) || string.IsNullOrEmpty(textBox2.Text) ||
@@ -64,7 +65,7 @@ namespace Shops
 
             try
             {
-                conn.Open();                
+                conn.Open();
                 GetPesan(); // Cek stock
                 SqlCommand stockCmd = new SqlCommand("SELECT Stock FROM Barangs WHERE IdBarang = @IdBarang", conn);
                 stockCmd.Parameters.AddWithValue("@IdBarang", textBox1.Text);
@@ -94,16 +95,30 @@ namespace Shops
                     return;
                 }
 
-                // Debug: Tampilkan nilai userId dan userName
+
+                // Menghitung Diskon
+                int harga = int.Parse(textBox4.Text);
+                double diskon = 0;
+
+                if (harga > 100000)
+                {
+                    diskon = 0.10; // 10% diskon
+                }
+
+                double hargaSetelahDiskon = harga - (harga * diskon);
+
+                textBox4.Text = hargaSetelahDiskon.ToString(); // Harga setelah diskon
+                textBox5.Text = (diskon * 100).ToString() + "%"; // Persentase diskon
+
+                // Tampilkan nilai userId dan userName
                 Console.WriteLine($"userId: {userId}, userName: {userName}");
 
                 // Insert pesanan
-                string insertQuery = @"
-                    INSERT INTO PelanganPesan (IdBarang, NamaBarang, Stock, Harga, NamaVendor, Idven, Id, NamaUser) VALUES (@IdBarang, @NamaBarang, @Stock, @Harga, @NamaVendor, @Idven, @Id, @NamaUser)";
+                string insertQuery = @"INSERT INTO PelanganPesan (IdBarang, NamaBarang, Stock, Harga, NamaVendor, Idven, Id, NamaUser) VALUES (@IdBarang, @NamaBarang, @Stock, @Harga, @NamaVendor, @Idven, @Id, @NamaUser)";
 
                 SqlCommand insertCmd = new SqlCommand(insertQuery, conn);
-                
-                insertCmd.Parameters.Clear(); 
+
+                insertCmd.Parameters.Clear();
                 insertCmd.Parameters.AddWithValue("@IdBarang", textBox1.Text);
                 insertCmd.Parameters.AddWithValue("@NamaBarang", textBox2.Text);
                 insertCmd.Parameters.AddWithValue("@Stock", order);
@@ -145,7 +160,7 @@ namespace Shops
             {
                 conn.Close();
             }
-        }       
+        }
         void GetPesan()
         {
             SqlCommand cmd = new SqlCommand("SELECT IdBarang, NamaBarang, Stock, Harga, NamaVendor, Idven FROM Barangs", conn);
@@ -154,6 +169,8 @@ namespace Shops
             sda.Fill(dt);
             dataGridView1.DataSource = dt;
         }
+
+        private int StockAda = 0;
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -167,12 +184,115 @@ namespace Shops
                 comboBox1.SelectedValue = row.Cells["Idven"].Value.ToString();
 
                 //textBox1.ReadOnly = true;
+
+                StockAda = Convert.ToInt32(row.Cells["Stock"].Value.ToString());
+
+                // Menghitung total harga
+                int harga = int.Parse(textBox4.Text);
+
+                try
+                {
+                    int Stock = Convert.ToInt32(textBox3.Text);
+                    int totalHarga = harga * Stock;
+                    textBox6.Text = totalHarga.ToString();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+
+                // Menghitung Diskon
+                //int harga = int.Parse(textBox4.Text);
+                //double diskon = 0;
+
+                //if (harga > 100000)
+                //{
+                //    diskon = 0.10; // Diskon 10% untuk harga di atas 100000
+                //}
+
+                //double hargaSetelahDiskon = harga - (harga * diskon);
+                //textBox4.Text = hargaSetelahDiskon.ToString(); // Update harga setelah diskon
+                //textBox5.Text = (diskon * 100).ToString() + "%";
             }
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void UpdateTotalHarga()
+        {
+            try
+            {
+                int harga = int.Parse(textBox4.Text);
+                int jumlah = int.Parse(textBox3.Text);
+                int totalHarga = harga * jumlah;
+
+                // Menghitung Diskon
+                double diskon = 0;
+
+                if (totalHarga > 100000)
+                {
+                    diskon = 0.10; //10 %
+                }
+                double HargaDis = totalHarga - (totalHarga * diskon);
+
+                if (diskon > 0)
+                {
+                    textBox5.Text = (diskon * 100).ToString() + "%";
+                    textBox6.Text = HargaDis.ToString();
+                } else
+                {
+                    textBox5.Text = "0%";
+                    textBox6.Text = totalHarga.ToString();
+                }
+            } catch (FormatException)
+            {
+                MessageBox.Show("Masukan Angka");
+                textBox6.Text = "0";
+            }
+        }
+
+        private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; 
+            }
+
+            //if (e.KeyChar == (char)Keys.Enter)
+            //{
+            //    UpdateTotalHarga();
+            //    e.Handled = true;
+            //}
+
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                if (int.TryParse(textBox3.Text, out int jumlah) && jumlah > StockAda)
+                {
+                    MessageBox.Show($"Stock Tidak Cukup, Stock Hanya Ada {StockAda}");
+                    textBox3.Clear();
+                    textBox6.Text = "";
+                } else
+                {
+                    UpdateTotalHarga();
+                }
+                e.Handled = true;
+            }
+
         }
     }
 }

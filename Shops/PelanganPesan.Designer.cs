@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
+            textBox6 = new TextBox();
+            label8 = new Label();
+            textBox5 = new TextBox();
+            label7 = new Label();
             label6 = new Label();
             comboBox1 = new ComboBox();
             textBox4 = new TextBox();
@@ -49,6 +53,10 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(textBox6);
+            groupBox1.Controls.Add(label8);
+            groupBox1.Controls.Add(textBox5);
+            groupBox1.Controls.Add(label7);
             groupBox1.Controls.Add(label6);
             groupBox1.Controls.Add(comboBox1);
             groupBox1.Controls.Add(textBox4);
@@ -64,10 +72,52 @@
             groupBox1.Controls.Add(textBox1);
             groupBox1.Location = new Point(458, 70);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(292, 266);
+            groupBox1.Size = new Size(292, 361);
             groupBox1.TabIndex = 26;
             groupBox1.TabStop = false;
             groupBox1.Text = "Barang";
+            groupBox1.Enter += groupBox1_Enter;
+            // 
+            // textBox6
+            // 
+            textBox6.Location = new Point(134, 204);
+            textBox6.Name = "textBox6";
+            textBox6.ReadOnly = true;
+            textBox6.Size = new Size(143, 23);
+            textBox6.TabIndex = 28;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.BackColor = SystemColors.Control;
+            label8.Font = new Font("Tahoma", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label8.ForeColor = Color.Black;
+            label8.Location = new Point(24, 204);
+            label8.Name = "label8";
+            label8.Size = new Size(85, 18);
+            label8.TabIndex = 27;
+            label8.Text = "Total Harga";
+            // 
+            // textBox5
+            // 
+            textBox5.Location = new Point(134, 175);
+            textBox5.Name = "textBox5";
+            textBox5.ReadOnly = true;
+            textBox5.Size = new Size(143, 23);
+            textBox5.TabIndex = 26;
+            textBox5.TextChanged += textBox5_TextChanged;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.BackColor = SystemColors.Control;
+            label7.Font = new Font("Tahoma", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label7.ForeColor = Color.Black;
+            label7.Location = new Point(24, 175);
+            label7.Name = "label7";
+            label7.Size = new Size(50, 18);
+            label7.TabIndex = 25;
+            label7.Text = "Diskon";
             // 
             // label6
             // 
@@ -86,7 +136,7 @@
             comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox1.FormattingEnabled = true;
             comboBox1.Items.AddRange(new object[] { "tes" });
-            comboBox1.Location = new Point(134, 172);
+            comboBox1.Location = new Point(134, 233);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(143, 23);
             comboBox1.TabIndex = 23;
@@ -106,6 +156,7 @@
             textBox3.Name = "textBox3";
             textBox3.Size = new Size(83, 23);
             textBox3.TabIndex = 21;
+            textBox3.KeyPress += textBox3_KeyPress;
             // 
             // label5
             // 
@@ -125,7 +176,7 @@
             label4.BackColor = SystemColors.Control;
             label4.Font = new Font("Tahoma", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label4.ForeColor = Color.Black;
-            label4.Location = new Point(24, 177);
+            label4.Location = new Point(24, 238);
             label4.Name = "label4";
             label4.Size = new Size(54, 18);
             label4.TabIndex = 19;
@@ -145,7 +196,7 @@
             // 
             // button4
             // 
-            button4.Location = new Point(6, 231);
+            button4.Location = new Point(6, 275);
             button4.Name = "button4";
             button4.Size = new Size(121, 23);
             button4.TabIndex = 17;
@@ -162,7 +213,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(134, 231);
+            button1.Location = new Point(134, 275);
             button1.Name = "button1";
             button1.Size = new Size(143, 23);
             button1.TabIndex = 14;
@@ -242,5 +293,9 @@
         private TextBox textBox1;
         private DataGridView dataGridView1;
         private Label label6;
+        private TextBox textBox5;
+        private Label label7;
+        private TextBox textBox6;
+        private Label label8;
     }
 }
